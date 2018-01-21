@@ -14,14 +14,14 @@ class App extends Component {
     this.state = {
       videos: [],
       selectedVideo: null
-    }
+    };
 
-    YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
+    YTSearch({ key: API_KEY, term: 'surfboards' }, videos => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
       });
-    })
+    });
   }
 
   render() {
@@ -30,15 +30,13 @@ class App extends Component {
         <SearchBar />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
-          onVideoSelect={selectedVideo => {
-            this.setState({ selectedVideo })
-          }
-          }
-          videos={this.state.videos} />
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+          videos={this.state.videos}
+        />
       </div>
     );
   }
-};
+}
 
 ReactDOM.render(<App />, document.querySelector('.container'));
 
